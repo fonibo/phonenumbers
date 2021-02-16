@@ -63,16 +63,22 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
     return Row(
       children: <Widget>[
         Container(
-          width: 115,
+          width: 135,
           margin: const EdgeInsets.only(right: 15),
           child: GestureDetector(
             onTap: onChangeCountry,
             child: ValueListenableBuilder<Country>(
               valueListenable: widget.controller.countryListener,
               builder: (context, value, child) => InputDecorator(
+                expands: false,
                 textAlignVertical: TextAlignVertical.center,
                 isFocused: _countryCodeFocused,
                 decoration: widget.decoration.copyWith(
+                  labelText: null,
+                  helperText: null,
+                  hintText: null,
+                  errorText: null,
+                  counterText: null,
                   prefixIcon: value == null
                       ? null
                       : Image.network(

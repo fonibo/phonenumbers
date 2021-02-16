@@ -94,7 +94,7 @@ class _CountrySearchDelegate extends SearchDelegate<Country> {
         theme,
         filteredCountries[index],
         onTap: () {
-          final country = countries[index];
+          final country = filteredCountries[index];
           Navigator.of(context)..pop()..pop(country);
         },
       ),
