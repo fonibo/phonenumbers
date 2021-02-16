@@ -13,15 +13,18 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        brightness: Brightness.dark,
       ),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Phone Number Input'),
         ),
-        body: Column(
-          children: <Widget>[
-            PhoneNumberInput(),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(24),
+          child: PhoneNumberField(
+            controller: PhoneNumberEditingController.countryCode('AZ'),
+            decoration: InputDecoration(border: OutlineInputBorder()),
+          ),
         ),
       ),
     );

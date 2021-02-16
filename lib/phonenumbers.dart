@@ -1,3 +1,5 @@
 library phonenumbers;
 
-export 'src/phonenumber_input.dart';
+export 'src/phonenumber.dart';
+export 'src/controller.dart';
+export 'src/field.dart';

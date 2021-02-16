@@ -706,8 +706,8 @@
     "prefix": 39,
     "code": "IT",
     "length": {
-      "min": null,
-      "max": 11
+      "min": 9,
+      "max": 13
     }
   },
   {

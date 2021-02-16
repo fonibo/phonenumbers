@@ -107,7 +107,7 @@ final countries = <Country>[
   Country('Ireland', 'IE', 353, LengthRule.range(7, 11)),
   Country('Isle of Man', 'IM', 441624, LengthRule.exact(6)),
   Country('Israel', 'IL', 972, LengthRule.range(8, 9)),
-  Country('Italy', 'IT', 39, LengthRule.range(null, 11)),
+  Country('Italy', 'IT', 39, LengthRule.range(9, 13)),
   Country('Ivory Coast', 'CI', 225, LengthRule.exact(8)),
   Country('Jamaica', 'JM', 1876, LengthRule.exact(7)),
   Country('Japan', 'JP', 81, LengthRule.range(9, 10)),
