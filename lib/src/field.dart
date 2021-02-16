@@ -10,14 +10,18 @@ class PhoneNumberField extends StatefulWidget {
     Key key,
     this.decoration = const InputDecoration(),
     this.style,
+    this.countryCodeWidth = 135,
     PhoneNumberEditingController controller,
   })  : this.controller = controller ?? PhoneNumberEditingController(),
         this._selfControlled = controller == null,
+        assert(countryCodeWidth != null),
         super(key: key);
 
   final InputDecoration decoration;
   final PhoneNumberEditingController controller;
   final TextStyle style;
+  final double countryCodeWidth;
+
   final bool _selfControlled;
 
   @override
@@ -63,7 +67,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
     return Row(
       children: <Widget>[
         Container(
-          width: 135,
+          width: widget.countryCodeWidth,
           margin: const EdgeInsets.only(right: 15),
           child: GestureDetector(
             onTap: onChangeCountry,

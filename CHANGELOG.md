@@ -1,6 +1,12 @@
+## 0.0.3
+
+## Features
+
+- Added `countryCodeWidth` property
+
 ## 0.0.2
 
-### Documentation
+### Fixes
 
 - Fix screenshot URLs
 
