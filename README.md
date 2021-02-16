@@ -2,8 +2,8 @@
 
 Phone number validation and filed written in pure dart without any native dependency.
 
-| ![](.github/assets/screen0.png) | ![](.github/assets/screen1.png) |
-| ------------------------------- | ------------------------------- |
+| ![](https://github.com/fonibo/phonenumbers/raw/main/.github/assets/screen0.png) | ![](https://github.com/fonibo/phonenumbers/raw/main/.github/assets/screen1.png) |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 
 > ⛔️ **The package is not production ready.**\
 > There might be some breaking changes over time, we'll try not to break too much but keep that in your mind.
