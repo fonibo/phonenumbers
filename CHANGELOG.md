@@ -1,3 +1,13 @@
+## 0.0.4
+
+### Features
+
+- Added inline documentation for the public API.
+
+### Fixes
+
+- Update country and national number controllers when updating value
+
 ## 0.0.3
 
 ## Features

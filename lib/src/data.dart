@@ -1,5 +1,6 @@
 import 'country.dart';
 
+/// Holds country related phone number data
 final countries = <Country>[
   Country('Afghanistan', 'AF', 93, LengthRule.exact(9)),
   Country('Albania', 'AL', 355, LengthRule.range(3, 9)),

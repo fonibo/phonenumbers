@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'country.dart';
 import 'data.dart';
 
+/// Country selection dialog UI implementation.
 class CountryDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

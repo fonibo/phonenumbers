@@ -72,7 +72,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
           child: GestureDetector(
             onTap: onChangeCountry,
             child: ValueListenableBuilder<Country>(
-              valueListenable: widget.controller.countryListener,
+              valueListenable: widget.controller.countryNotifier,
               builder: (context, value, child) => InputDecorator(
                 expands: false,
                 textAlignVertical: TextAlignVertical.center,
@@ -106,7 +106,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
         ),
         Expanded(
           child: ValueListenableBuilder<Country>(
-            valueListenable: widget.controller.countryListener,
+            valueListenable: widget.controller.countryNotifier,
             builder: (context, value, child) => TextField(
               controller: widget.controller.nationalNumberController,
               style: textStyle,
