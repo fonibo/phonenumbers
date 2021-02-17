@@ -1,3 +1,9 @@
+## 0.0.5
+
+### Fixes
+
+- Fixed phone number parsing
+
 ## 0.0.4
 
 ### Features
