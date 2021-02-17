@@ -18,7 +18,7 @@ class PhoneNumberEditingController extends ChangeNotifier
   }
 
   /// Creates a controller with given default [country] selected.
-  PhoneNumberEditingController.country(Country country)
+  PhoneNumberEditingController.fromCountry(Country country)
       : assert(country != null),
         nationalNumberController = TextEditingController(),
         countryNotifier = ValueNotifier(country),
@@ -28,8 +28,8 @@ class PhoneNumberEditingController extends ChangeNotifier
 
   /// Creates a controller with default selected country that matches given
   /// [countryCode] argument.
-  factory PhoneNumberEditingController.countryCode(String countryCode) =>
-      PhoneNumberEditingController.country(Country.fromCode(countryCode));
+  factory PhoneNumberEditingController.fromCountryCode(String countryCode) =>
+      PhoneNumberEditingController.fromCountry(Country.fromCode(countryCode));
 
   /// Controller of the national phone number [TextField].
   final TextEditingController nationalNumberController;

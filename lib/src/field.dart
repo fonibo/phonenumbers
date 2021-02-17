@@ -11,18 +11,21 @@ class PhoneNumberField extends StatefulWidget {
     this.decoration = const InputDecoration(),
     this.style,
     this.countryCodeWidth = 135,
-    PhoneNumberEditingController controller,
-  })  : this.controller = controller ?? PhoneNumberEditingController(),
-        this._selfControlled = controller == null,
-        assert(countryCodeWidth != null),
+    this.controller,
+  })  : assert(countryCodeWidth != null),
         super(key: key);
 
+  /// Input decoration to customize input.
   final InputDecoration decoration;
-  final PhoneNumberEditingController controller;
-  final TextStyle style;
-  final double countryCodeWidth;
 
-  final bool _selfControlled;
+  /// Editing controller that stores current state of the widget.
+  final PhoneNumberEditingController controller;
+
+  /// Text font style
+  final TextStyle style;
+
+  /// Width of the country code section
+  final double countryCodeWidth;
 
   @override
   _PhoneNumberFieldState createState() => _PhoneNumberFieldState();
@@ -30,6 +33,15 @@ class PhoneNumberField extends StatefulWidget {
 
 class _PhoneNumberFieldState extends State<PhoneNumberField> {
   bool _countryCodeFocused = false;
+  PhoneNumberEditingController _controller;
+  final _hiddenText = TextStyle(
+    color: Colors.transparent,
+    height: 0,
+    fontSize: 0,
+  );
+
+  PhoneNumberEditingController get _effectiveController =>
+      widget.controller ?? _controller;
 
   Future<void> onChangeCountry() async {
     _countryCodeFocused = true;
@@ -40,9 +52,8 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
           builder: (context) => CountryDialog(),
         ),
       );
-      print(country);
       if (country != null) {
-        widget.controller.country = country;
+        _effectiveController.country = country;
       }
     } finally {
       _countryCodeFocused = false;
@@ -53,10 +64,16 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
   }
 
   @override
-  void dispose() {
-    if (widget._selfControlled) {
-      widget.controller.dispose();
+  void initState() {
+    if (widget.controller == null) {
+      _controller = PhoneNumberEditingController();
     }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -64,60 +81,81 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
   Widget build(BuildContext context) {
     final textStyle = widget.style ?? Theme.of(context).textTheme.bodyText1;
 
-    return Row(
-      children: <Widget>[
-        Container(
-          width: widget.countryCodeWidth,
-          margin: const EdgeInsets.only(right: 15),
-          child: GestureDetector(
-            onTap: onChangeCountry,
-            child: ValueListenableBuilder<Country>(
-              valueListenable: widget.controller.countryNotifier,
-              builder: (context, value, child) => InputDecorator(
-                expands: false,
-                textAlignVertical: TextAlignVertical.center,
-                isFocused: _countryCodeFocused,
-                decoration: widget.decoration.copyWith(
-                  labelText: null,
-                  helperText: null,
-                  hintText: null,
-                  errorText: null,
-                  counterText: null,
-                  prefixIcon: value == null
-                      ? null
-                      : Image.network(
-                          'https://www.countryflags.io/${value.code}/flat/24.png',
-                          width: 24,
-                          height: 24,
-                        ),
-                  prefix: null,
-                  prefixText: null,
-                  suffixIcon: null,
-                  suffixText: null,
-                  suffix: null,
-                ),
-                child: Text(
-                  value != null ? '+${value.prefix}' : '+',
-                  style: textStyle,
+    return InputDecorator(
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.zero,
+        counterStyle: widget.decoration.counterStyle,
+        errorStyle: widget.decoration.errorStyle,
+        labelStyle: widget.decoration.labelStyle,
+        helperStyle: widget.decoration.helperStyle,
+        errorText: widget.decoration.errorText,
+        helperText: widget.decoration.helperText,
+        labelText: widget.decoration.labelText,
+        counterText: widget.decoration.counterText,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: widget.countryCodeWidth,
+            margin: const EdgeInsets.only(right: 15),
+            child: GestureDetector(
+              onTap: onChangeCountry,
+              child: ValueListenableBuilder<Country>(
+                valueListenable: _effectiveController.countryNotifier,
+                builder: (context, value, child) => InputDecorator(
+                  expands: false,
+                  textAlignVertical: TextAlignVertical.center,
+                  isFocused: _countryCodeFocused,
+                  decoration: widget.decoration.copyWith(
+                    hintText: '',
+                    errorStyle: _hiddenText,
+                    helperStyle: _hiddenText,
+                    counterStyle: _hiddenText,
+                    labelStyle: _hiddenText,
+                    counterText: null,
+                    prefixIcon: value == null
+                        ? null
+                        : Image.network(
+                            'https://www.countryflags.io/${value.code}/flat/24.png',
+                            width: 24,
+                            height: 24,
+                          ),
+                    prefix: null,
+                    prefixText: null,
+                    suffixIcon: null,
+                    suffixText: null,
+                    suffix: null,
+                  ),
+                  child: Text(
+                    value != null ? '+${value.prefix}' : '+',
+                    style: textStyle,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: ValueListenableBuilder<Country>(
-            valueListenable: widget.controller.countryNotifier,
-            builder: (context, value, child) => TextField(
-              controller: widget.controller.nationalNumberController,
-              style: textStyle,
-              decoration: widget.decoration.copyWith(counterText: ''),
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              maxLength: value?.length?.maxLength ?? 15,
+          Expanded(
+            child: ValueListenableBuilder<Country>(
+              valueListenable: _effectiveController.countryNotifier,
+              builder: (context, value, child) => TextField(
+                controller: _effectiveController.nationalNumberController,
+                style: textStyle,
+                decoration: widget.decoration.copyWith(
+                  errorStyle: _hiddenText,
+                  helperStyle: _hiddenText,
+                  counterStyle: _hiddenText,
+                  labelStyle: _hiddenText,
+                ),
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                maxLength: value?.length?.maxLength ?? 15,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

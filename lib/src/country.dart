@@ -1,6 +1,8 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+
 import 'data.dart';
 
 /// Defines length rules for phone numbers for specific country.
@@ -57,6 +59,20 @@ class Country {
   bool isValidNumber(String normalizedNumber) =>
       matches(normalizedNumber) &&
       length.test(normalizedNumber.length - _prefixStr.length);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (runtimeType == other.runtimeType &&
+            other is Country &&
+            other.name == name &&
+            other.code == code &&
+            other.prefix == prefix &&
+            other.length == length);
+  }
+
+  @override
+  int get hashCode => hashValues(name, code, prefix, length);
 }
 
 class _RangeLengthRule implements LengthRule {
@@ -70,6 +86,18 @@ class _RangeLengthRule implements LengthRule {
 
   @override
   int get maxLength => max;
+
+  @override
+  int get hashCode => hashValues(min, max);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (runtimeType == other.runtimeType &&
+            other is _RangeLengthRule &&
+            other.max == max &&
+            other.min == min);
+  }
 }
 
 class _OneOfLengthRule implements LengthRule {
@@ -82,6 +110,22 @@ class _OneOfLengthRule implements LengthRule {
 
   @override
   int get maxLength => items.reduce(max);
+
+  @override
+  int get hashCode => items.reduce((a, b) => a ^ b);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (runtimeType == other.runtimeType && other is _OneOfLengthRule) {
+      if (items.length != other.items.length) return false;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i] != other.items[i]) return false;
+      }
+      return true;
+    }
+    return false;
+  }
 }
 
 class _ExactLengthRule implements LengthRule {
@@ -94,4 +138,15 @@ class _ExactLengthRule implements LengthRule {
 
   @override
   int get maxLength => length;
+
+  @override
+  int get hashCode => length;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (runtimeType == other.runtimeType &&
+            other is _ExactLengthRule &&
+            other.length == length);
+  }
 }

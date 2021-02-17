@@ -21,9 +21,19 @@ class MyApp extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(24),
-          child: PhoneNumberField(
-            controller: PhoneNumberEditingController.countryCode('AZ'),
-            decoration: InputDecoration(border: OutlineInputBorder()),
+          child: Column(
+            children: <Widget>[
+              PhoneNumberField(
+                controller: PhoneNumberEditingController.fromCountryCode('AZ'),
+                decoration: InputDecoration(border: OutlineInputBorder()),
+              ),
+              SizedBox(height: 24),
+              PhoneNumberFormField(
+                autovalidateMode: AutovalidateMode.always,
+                controller: PhoneNumberEditingController.fromCountryCode('TR'),
+                decoration: InputDecoration(border: UnderlineInputBorder()),
+              ),
+            ],
           ),
         ),
       ),

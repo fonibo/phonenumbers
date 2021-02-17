@@ -1,3 +1,10 @@
+## 0.0.6
+
+### Features
+
+- Added `PhoneNumberFormField` widget
+- Error and helper text displayment fixed
+
 ## 0.0.5
 
 ### Fixes
