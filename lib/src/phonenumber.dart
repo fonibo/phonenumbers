@@ -12,11 +12,6 @@ class PhoneNumber {
     this.isValid,
   });
 
-  final Country country;
-  final String nationalNumber;
-  final String formattedNumber;
-  final bool isValid;
-
   static const empty = PhoneNumber._(
     country: null,
     nationalNumber: '',
@@ -24,26 +19,24 @@ class PhoneNumber {
     isValid: false,
   );
 
-  @override
-  String toString() => formattedNumber;
+  /// Phone number country
+  final Country country;
 
-  PhoneNumber copyWith({
-    Country country,
-    String nationalNumber,
-    String formattedNumber,
-    bool isValid,
-  }) =>
-      PhoneNumber._(
-        country: country ?? this.country,
-        nationalNumber: nationalNumber ?? this.nationalNumber,
-        formattedNumber: formattedNumber ?? this.formattedNumber,
-        isValid: isValid ?? this.isValid,
-      );
+  /// National number part of the phone number
+  final String nationalNumber;
 
+  /// E.164 formatted phone number
+  final String formattedNumber;
+
+  /// Stores whether or not the phone number is valid
+  final bool isValid;
+
+  /// Normalize [number] by removing additional symbols
   static String normalize(String number) {
     return number.split('').where((c) => int.tryParse(c) != null).join();
   }
 
+  /// Create [PhoneNumber] instance using given [country] and [nationalNumber]
   factory PhoneNumber(Country country, String nationalNumber) {
     ArgumentError.checkNotNull(country, 'country');
     ArgumentError.checkNotNull(nationalNumber, 'nationalNumber');
@@ -58,17 +51,20 @@ class PhoneNumber {
     );
   }
 
+  /// Create [PhoneNumber] instance using country found by given [countryCode]
+  /// and [nationalNumber]
   factory PhoneNumber.countryCode(String countryCode, String nationalNumber) {
     ArgumentError.checkNotNull(countryCode, 'countryCode');
 
     return PhoneNumber(Country.fromCode(countryCode), nationalNumber);
   }
 
+  /// Parse given [value] into [PhoneNumber] instance
   factory PhoneNumber.parse(String value) {
     ArgumentError.checkNotNull(value, 'value');
 
     final normalizedValue = normalize(value);
-    final matchedCountries = countries.where((c) => c.matches(value)).toList();
+    final matchedCountries = countries.where((c) => c.matches(normalizedValue));
 
     for (var item in matchedCountries) {
       if (item.isValidNumber(normalizedValue)) {
@@ -97,4 +93,21 @@ class PhoneNumber {
       isValid: false,
     );
   }
+
+  @override
+  String toString() => formattedNumber;
+
+  /// Create new [PhoneNumber] instance by modifying
+  PhoneNumber copyWith({
+    Country country,
+    String nationalNumber,
+    String formattedNumber,
+    bool isValid,
+  }) =>
+      PhoneNumber._(
+        country: country ?? this.country,
+        nationalNumber: nationalNumber ?? this.nationalNumber,
+        formattedNumber: formattedNumber ?? this.formattedNumber,
+        isValid: isValid ?? this.isValid,
+      );
 }
