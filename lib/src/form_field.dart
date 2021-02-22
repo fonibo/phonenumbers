@@ -12,19 +12,24 @@ class PhoneNumberFormField extends FormField<PhoneNumber> {
     TextStyle style,
     double countryCodeWidth = 135,
     String errorMessage = 'Invalid phone number',
-    PhoneNumber initialValue = PhoneNumber.empty,
+    PhoneNumber initialValue,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
   }) : super(
           key: key,
           autovalidateMode: autovalidateMode,
-          initialValue: initialValue,
-          validator: (value) => value?.isValid == true ? null : errorMessage,
+          initialValue: controller != null
+              ? controller.value
+              : (initialValue ?? PhoneNumber.empty),
+          validator: (value) {
+            if (value?.isValid == true) return null;
+            return errorMessage;
+          },
           builder: (field) {
             final state = field as _PhoneNumberFormFieldState;
             return PhoneNumberField(
+              style: style,
               controller: state._effectiveController,
               decoration: decoration.copyWith(errorText: field.errorText),
-              style: style,
               countryCodeWidth: countryCodeWidth,
             );
           },

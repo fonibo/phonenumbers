@@ -1,3 +1,9 @@
+## 0.0.7
+
+### Fixes
+
+- Validate when initial value is provided
+
 ## 0.0.6
 
 ### Features
