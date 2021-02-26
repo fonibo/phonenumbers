@@ -70,7 +70,7 @@ class PhoneNumber {
       if (item.isValidNumber(normalizedValue)) {
         return PhoneNumber._(
           nationalNumber: normalizedValue.substring(item.prefixLength),
-          formattedNumber: '+${item.prefix}$normalizedValue',
+          formattedNumber: '+$normalizedValue',
           country: item,
           isValid: true,
         );
@@ -80,8 +80,9 @@ class PhoneNumber {
     if (matchedCountries.isNotEmpty) {
       return PhoneNumber._(
         country: matchedCountries.first,
-        nationalNumber: normalizedValue,
-        formattedNumber: '+${matchedCountries.first.prefix}$normalizedValue',
+        nationalNumber:
+            normalizedValue.substring(matchedCountries.first.prefixLength),
+        formattedNumber: '+$normalizedValue',
         isValid: false,
       );
     }

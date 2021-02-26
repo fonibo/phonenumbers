@@ -1,3 +1,13 @@
+## 0.0.8
+
+### Fixes
+
+- Fixed `nationalNumber` and `formattedNumber` parsing
+
+## Testing
+
+- Added more unit tests for `PhoneNumber` class
+
 ## 0.0.7
 
 ### Fixes

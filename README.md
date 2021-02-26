@@ -20,7 +20,7 @@ of failture. Also lots of exists libraries have lack of customizability features
 
 ### Installation
 
-1. Add `phonenumbers: ^0.0.3` dependency to "pubspec.yaml" file
+1. Add `phonenumbers: ^0.0.8` dependency to "pubspec.yaml" file
 2. Run `[flutter] pub get` to install package
 3. Drink a cup of coffee
 
