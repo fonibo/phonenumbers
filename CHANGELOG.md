@@ -1,5 +1,9 @@
 ## 1.0.1
 
+### Fixes
+
+- Static analyzer issues fixed
+
 ### Features
 
 - Updated dialog title to "Choose a Country / Region"
