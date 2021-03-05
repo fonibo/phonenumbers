@@ -12,8 +12,7 @@ class PhoneNumberField extends StatefulWidget {
     this.style,
     this.countryCodeWidth = 135,
     this.controller,
-  })  : assert(countryCodeWidth != null),
-        super(key: key);
+  }) : super(key: key);
 
   /// Input decoration to customize input.
   final InputDecoration decoration;

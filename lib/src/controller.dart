@@ -19,8 +19,7 @@ class PhoneNumberEditingController extends ChangeNotifier
 
   /// Creates a controller with given default [country] selected.
   PhoneNumberEditingController.fromCountry(Country country)
-      : assert(country != null),
-        nationalNumberController = TextEditingController(),
+      : nationalNumberController = TextEditingController(),
         countryNotifier = ValueNotifier(country),
         _value = PhoneNumber.empty.copyWith(country: country) {
     _initialize();
