@@ -7,7 +7,7 @@ import 'country_dialog.dart';
 
 class PhoneNumberField extends StatefulWidget {
   PhoneNumberField({
-    Key key,
+    Key? key,
     this.decoration = const InputDecoration(),
     this.style,
     this.countryCodeWidth = 135,
@@ -19,10 +19,10 @@ class PhoneNumberField extends StatefulWidget {
   final InputDecoration decoration;
 
   /// Editing controller that stores current state of the widget.
-  final PhoneNumberEditingController controller;
+  final PhoneNumberEditingController? controller;
 
   /// Text font style
-  final TextStyle style;
+  final TextStyle? style;
 
   /// Width of the country code section
   final double countryCodeWidth;
@@ -33,14 +33,14 @@ class PhoneNumberField extends StatefulWidget {
 
 class _PhoneNumberFieldState extends State<PhoneNumberField> {
   bool _countryCodeFocused = false;
-  PhoneNumberEditingController _controller;
+  PhoneNumberEditingController? _controller;
   final _hiddenText = TextStyle(
     color: Colors.transparent,
     height: 0,
     fontSize: 0,
   );
 
-  PhoneNumberEditingController get _effectiveController =>
+  PhoneNumberEditingController? get _effectiveController =>
       widget.controller ?? _controller;
 
   Future<void> onChangeCountry() async {
@@ -53,7 +53,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
         ),
       );
       if (country != null) {
-        _effectiveController.country = country;
+        _effectiveController!.country = country;
       }
     } finally {
       _countryCodeFocused = false;
@@ -102,8 +102,8 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
             margin: const EdgeInsets.only(right: 15),
             child: GestureDetector(
               onTap: onChangeCountry,
-              child: ValueListenableBuilder<Country>(
-                valueListenable: _effectiveController.countryNotifier,
+              child: ValueListenableBuilder<Country?>(
+                valueListenable: _effectiveController!.countryNotifier,
                 builder: (context, value, child) => InputDecorator(
                   expands: false,
                   textAlignVertical: TextAlignVertical.center,
@@ -137,10 +137,10 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
             ),
           ),
           Expanded(
-            child: ValueListenableBuilder<Country>(
-              valueListenable: _effectiveController.countryNotifier,
+            child: ValueListenableBuilder<Country?>(
+              valueListenable: _effectiveController!.countryNotifier,
               builder: (context, value, child) => TextField(
-                controller: _effectiveController.nationalNumberController,
+                controller: _effectiveController!.nationalNumberController,
                 style: textStyle,
                 decoration: widget.decoration.copyWith(
                   errorStyle: _hiddenText,
@@ -150,7 +150,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
                 ),
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                maxLength: value?.length?.maxLength ?? 15,
+                maxLength: value?.length.maxLength ?? 15,
               ),
             ),
           ),

@@ -15,8 +15,8 @@ void main() {
     });
 
     test('.country', () {
-      expect(PhoneNumber.parse('+99455777').country.code, 'AZ');
-      expect(PhoneNumber.parse('+4345555').country.code, 'AT');
+      expect(PhoneNumber.parse('+99455777').country!.code, 'AZ');
+      expect(PhoneNumber.parse('+4345555').country!.code, 'AT');
     });
 
     test('.nationalNumber', () {

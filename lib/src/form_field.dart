@@ -6,13 +6,13 @@ import 'phonenumber.dart';
 
 class PhoneNumberFormField extends FormField<PhoneNumber> {
   PhoneNumberFormField({
-    Key key,
+    Key? key,
     this.controller,
     InputDecoration decoration = const InputDecoration(),
-    TextStyle style,
+    TextStyle? style,
     double countryCodeWidth = 135,
     String errorMessage = 'Invalid phone number',
-    PhoneNumber initialValue,
+    PhoneNumber? initialValue,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
   }) : super(
           key: key,
@@ -35,22 +35,22 @@ class PhoneNumberFormField extends FormField<PhoneNumber> {
           },
         );
 
-  final PhoneNumberEditingController controller;
+  final PhoneNumberEditingController? controller;
 
   @override
   _PhoneNumberFormFieldState createState() => _PhoneNumberFormFieldState();
 }
 
 class _PhoneNumberFormFieldState extends FormFieldState<PhoneNumber> {
-  PhoneNumberEditingController _controller;
+  PhoneNumberEditingController? _controller;
 
-  PhoneNumberEditingController get _effectiveController =>
+  PhoneNumberEditingController? get _effectiveController =>
       widget.controller ?? _controller;
 
   @override
   void initState() {
     super.initState();
-    _effectiveController.addListener(_handleControllerChanged);
+    _effectiveController!.addListener(_handleControllerChanged);
   }
 
   @override
@@ -68,10 +68,10 @@ class _PhoneNumberFormFieldState extends FormFieldState<PhoneNumber> {
       widget.controller?.addListener(_handleControllerChanged);
 
       if (oldWidget.controller != null && widget.controller == null)
-        _controller = PhoneNumberEditingController(oldWidget.controller.value);
+        _controller = PhoneNumberEditingController(oldWidget.controller!.value!);
 
       if (widget.controller != null) {
-        setValue(widget.controller.value);
+        setValue(widget.controller!.value);
         if (oldWidget.controller == null) _controller = null;
       }
     }
@@ -83,11 +83,11 @@ class _PhoneNumberFormFieldState extends FormFieldState<PhoneNumber> {
   @override
   void reset() {
     super.reset();
-    _effectiveController.value = widget.initialValue;
+    _effectiveController!.value = widget.initialValue;
   }
 
   void _handleControllerChanged() {
-    if (_effectiveController.value != value)
-      didChange(_effectiveController.value);
+    if (_effectiveController!.value != value)
+      didChange(_effectiveController!.value);
   }
 }

@@ -6,7 +6,7 @@ import 'phonenumber.dart';
 /// Controller holds all the persistent state used by the
 /// [PhoneNumberField] widget.
 class PhoneNumberEditingController extends ChangeNotifier
-    implements ValueNotifier<PhoneNumber> {
+    implements ValueNotifier<PhoneNumber?> {
   /// Creates a controller with given initial [value].
   PhoneNumberEditingController([PhoneNumber value = PhoneNumber.empty])
       : nationalNumberController =
@@ -35,11 +35,11 @@ class PhoneNumberEditingController extends ChangeNotifier
   final TextEditingController nationalNumberController;
 
   /// Notifier for currently selected country.
-  final ValueNotifier<Country> countryNotifier;
+  final ValueNotifier<Country?> countryNotifier;
 
   /// The currently selected country value stored in the controller.
-  Country get country => countryNotifier.value;
-  set country(Country newValue) {
+  Country? get country => countryNotifier.value;
+  set country(Country? newValue) {
     countryNotifier.value = newValue;
   }
 
@@ -50,13 +50,13 @@ class PhoneNumberEditingController extends ChangeNotifier
   }
 
   @override
-  set value(PhoneNumber newValue) {
+  set value(PhoneNumber? newValue) {
     if (value == newValue) return;
     _value = newValue;
     notifyListeners();
     _detach();
     try {
-      countryNotifier.value = newValue.country;
+      countryNotifier.value = newValue!.country;
       nationalNumberController.text = newValue.nationalNumber ?? '';
     } finally {
       _attach();
@@ -64,7 +64,7 @@ class PhoneNumberEditingController extends ChangeNotifier
   }
 
   @override
-  PhoneNumber get value => _value;
+  PhoneNumber? get value => _value;
 
   @override
   void dispose() {
@@ -74,7 +74,7 @@ class PhoneNumberEditingController extends ChangeNotifier
     super.dispose();
   }
 
-  PhoneNumber _value;
+  PhoneNumber? _value;
 
   void _attach() {
     countryNotifier.addListener(_onChange);

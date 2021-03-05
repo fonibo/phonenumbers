@@ -49,20 +49,20 @@ Widget _buildListTile(
   BuildContext context,
   ThemeData theme,
   Country country, {
-  Widget leading,
+  Widget? leading,
   bool showLeading = false,
-  VoidCallback onTap,
+  VoidCallback? onTap,
 }) {
   return ListTile(
     onTap: onTap ?? () => Navigator.pop(context, country),
     title: Text(country.name),
     trailing: Text(
       '+${country.prefix}',
-      style: theme.textTheme.bodyText1.copyWith(color: theme.accentColor),
+      style: theme.textTheme.bodyText1!.copyWith(color: theme.accentColor),
     ),
     leading: leading != null || showLeading
         ? DefaultTextStyle(
-            style: theme.textTheme.headline6,
+            style: theme.textTheme.headline6!,
             child: Opacity(
               opacity: 0.5,
               child: leading,
@@ -80,7 +80,7 @@ class _CountrySearchDelegate extends SearchDelegate<Country> {
   List<Widget> buildActions(BuildContext context) => [];
 
   @override
-  Widget buildLeading(BuildContext context) => null;
+  Widget buildLeading(BuildContext context) => SizedBox();
 
   @override
   Widget buildResults(BuildContext context) {

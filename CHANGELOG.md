@@ -1,3 +1,9 @@
+## 1.0.0
+
+### Fixes
+
+- Migration to null-safety
+
 ## 0.0.8
 
 ### Fixes

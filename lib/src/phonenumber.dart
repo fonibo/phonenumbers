@@ -20,16 +20,16 @@ class PhoneNumber {
   );
 
   /// Phone number country
-  final Country country;
+  final Country? country;
 
   /// National number part of the phone number
-  final String nationalNumber;
+  final String? nationalNumber;
 
   /// E.164 formatted phone number
-  final String formattedNumber;
+  final String? formattedNumber;
 
   /// Stores whether or not the phone number is valid
-  final bool isValid;
+  final bool? isValid;
 
   /// Normalize [number] by removing additional symbols
   static String normalize(String number) {
@@ -37,7 +37,7 @@ class PhoneNumber {
   }
 
   /// Create [PhoneNumber] instance using given [country] and [nationalNumber]
-  factory PhoneNumber(Country country, String nationalNumber) {
+  factory PhoneNumber(Country? country, String? nationalNumber) {
     if (country == null && nationalNumber == null) {
       return empty.clone();
     }
@@ -100,14 +100,14 @@ class PhoneNumber {
   }
 
   @override
-  String toString() => formattedNumber;
+  String toString() => formattedNumber!;
 
   /// Create new [PhoneNumber] instance by modifying
   PhoneNumber copyWith({
-    Country country,
-    String nationalNumber,
-    String formattedNumber,
-    bool isValid,
+    Country? country,
+    String? nationalNumber,
+    String? formattedNumber,
+    bool? isValid,
   }) =>
       PhoneNumber._(
         country: country ?? this.country,
