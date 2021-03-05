@@ -38,16 +38,20 @@ class PhoneNumber {
 
   /// Create [PhoneNumber] instance using given [country] and [nationalNumber]
   factory PhoneNumber(Country country, String nationalNumber) {
-    ArgumentError.checkNotNull(country, 'country');
-    ArgumentError.checkNotNull(nationalNumber, 'nationalNumber');
+    if (country == null && nationalNumber == null) {
+      return empty.clone();
+    }
 
-    final normalizedNationalNumber = normalize(nationalNumber);
+    final normalizedNationalNumber = normalize(nationalNumber ?? '');
 
     return PhoneNumber._(
       country: country,
       nationalNumber: normalizedNationalNumber,
-      formattedNumber: '+${country.prefix}$normalizedNationalNumber',
-      isValid: country.isValidNationalNumber(normalizedNationalNumber),
+      formattedNumber: country == null
+          ? normalizedNationalNumber
+          : '+${country.prefix}$normalizedNationalNumber',
+      isValid:
+          country?.isValidNationalNumber(normalizedNationalNumber) ?? false,
     );
   }
 
@@ -110,5 +114,13 @@ class PhoneNumber {
         nationalNumber: nationalNumber ?? this.nationalNumber,
         formattedNumber: formattedNumber ?? this.formattedNumber,
         isValid: isValid ?? this.isValid,
+      );
+
+  /// Create exact same clone of this [PhoneNumber] instance.
+  PhoneNumber clone() => PhoneNumber._(
+        country: country,
+        formattedNumber: formattedNumber,
+        isValid: isValid,
+        nationalNumber: nationalNumber,
       );
 }
