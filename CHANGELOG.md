@@ -1,3 +1,9 @@
+## 1.0.1
+
+### Features
+
+- Updated dialog title to "Choose a Country / Region"
+
 ## 1.0.0
 
 ### Fixes
