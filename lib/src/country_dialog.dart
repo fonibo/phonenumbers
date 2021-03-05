@@ -11,7 +11,7 @@ class CountryDialog extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose a country'),
+        title: Text('Choose a Country / Region'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),

@@ -5,7 +5,7 @@ Phone number validation and filed written in pure dart without any native depend
 | ![](https://i.imgur.com/bADKfYM.png) | ![](https://i.imgur.com/xasmErW.png) |
 | ------------------------------------ | ------------------------------------ |
 
-<br/>
+## Package Status
 
 > ⛔️ **The package is not production ready.**\
 > There might be some breaking changes over time, we'll try not to break too much but keep that in your mind.
@@ -22,7 +22,7 @@ of failture. Also lots of exists libraries have lack of customizability features
 
 ### Installation
 
-1. Add `phonenumbers: ^0.0.8` dependency to "pubspec.yaml" file
+1. Add `phonenumbers: ^1.0.0` dependency to "pubspec.yaml" file
 2. Run `[flutter] pub get` to install package
 3. Drink a cup of coffee
 
