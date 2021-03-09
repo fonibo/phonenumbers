@@ -16,7 +16,7 @@ final countries = <Country>[
   Country('Aruba', 'AW', 297, LengthRule.exact(7)),
   Country('Australia', 'AU', 61, LengthRule.range(4, 15)),
   Country('Austria', 'AT', 43, LengthRule.range(4, 13)),
-  Country('Azerbaijan', 'AZ', 994, LengthRule.range(8, 9)),
+  Country('Azerbaijan', 'AZ', 994, LengthRule.exact(9)),
   Country('Bahamas', 'BS', 1242, LengthRule.exact(7)),
   Country('Bahrain', 'BH', 973, LengthRule.exact(8)),
   Country('Bangladesh', 'BD', 880, LengthRule.range(6, 10)),

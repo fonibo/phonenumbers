@@ -1,3 +1,9 @@
+## 1.0.2
+
+### Fixes
+
+- Fixed phone number database entry for 994
+
 ## 1.0.1
 
 ### Fixes

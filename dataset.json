@@ -96,10 +96,7 @@
     "name": "Azerbaijan",
     "prefix": 994,
     "code": "AZ",
-    "length": {
-      "min": 8,
-      "max": 9
-    }
+    "length": 9
   },
   {
     "name": "Bahamas",
