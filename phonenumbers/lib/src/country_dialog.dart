@@ -114,7 +114,7 @@ class _CountrySearchDelegate extends SearchDelegate<Country> {
 
   @override
   Widget buildSuggestions(BuildContext context) =>
-      query.length > 0 ? buildResults(context) : SizedBox();
+      query.isNotEmpty ? buildResults(context) : SizedBox();
 }
 
 bool _matches(String query, Country country) {

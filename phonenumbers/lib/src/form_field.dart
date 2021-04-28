@@ -14,6 +14,8 @@ class PhoneNumberFormField extends FormField<PhoneNumber> {
     String errorMessage = 'Invalid phone number',
     PhoneNumber? initialValue,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
+    String dialogTitle = 'Area code',
+    PhoneNumberFieldPrefixBuilder prefixBuilder = _buildPrefix,
   }) : super(
           key: key,
           autovalidateMode: autovalidateMode,
@@ -31,11 +33,19 @@ class PhoneNumberFormField extends FormField<PhoneNumber> {
               controller: state._effectiveController,
               decoration: decoration.copyWith(errorText: field.errorText),
               countryCodeWidth: countryCodeWidth,
+              dialogTitle: dialogTitle,
+              prefixBuilder: prefixBuilder,
             );
           },
         );
 
   final PhoneNumberEditingController? controller;
+
+  static Widget? _buildPrefix(BuildContext context, Country? country) {
+    return PhoneNumberField.defaultPrefixBuilder != null
+        ? PhoneNumberField.defaultPrefixBuilder!(context, country)
+        : null;
+  }
 
   @override
   _PhoneNumberFormFieldState createState() => _PhoneNumberFormFieldState();

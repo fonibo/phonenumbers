@@ -84,10 +84,10 @@ packages:
   phonenumbers_core:
     dependency: "direct main"
     description:
-      path: "../phonenumbers_core"
-      relative: true
-    source: path
-    version: "0.1.0"
+      name: phonenumbers_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   quiver:
     dependency: transitive
     description:

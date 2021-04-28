@@ -1,3 +1,15 @@
+## 1.1.0
+
+### Features
+
+- Core functionalities like parsing & formatting moved to separate package: [`package:phonenumbers_core/core.dart`](https://pub.dev/packages/phonenumbers_core).
+- Added `prefixBuilder` property to `PhoneNumberField`
+- Added `dialogTitle` property to `PhoneNumberField`
+
+### Breaking
+
+- Removed `phonenumbers_countries` library and moved to separate package: [`package:phonenumbers_core/data.dart`](https://pub.dev/packages/phonenumbers_core).
+
 ## 1.0.2
 
 ### Fixes
