@@ -20,10 +20,10 @@ class Country {
       : _prefixStr = prefix.toString(),
         prefixLength = prefix.toString().length;
 
-  /// Returns [Country] instance using [code].
-  static Country fromCode(String code) {
-    code = code.toUpperCase();
-    return countries.firstWhere((c) => c.code == code);
+  /// Returns [Country] instance using [isoCode].
+  static Country fromCode(String isoCode) {
+    isoCode = isoCode.toUpperCase();
+    return countries.firstWhere((c) => c.code == isoCode);
   }
 
   /// Country name

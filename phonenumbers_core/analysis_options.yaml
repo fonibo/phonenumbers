@@ -1,9 +1,6 @@
 analyzer:
-  exclude:
-    - "**/*.g.dart"
-    - "lib/generated/**"
   strong-mode:
-    implicit-casts: false
+    implicit-casts: true
   errors:
     # treat missing required parameters as a warning (not a hint)
     missing_required_param: warning

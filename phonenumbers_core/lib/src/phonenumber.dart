@@ -2,44 +2,13 @@ import 'country.dart';
 import 'data.dart';
 
 class PhoneNumber {
-  const PhoneNumber._({
-    this.country,
-    this.nationalNumber,
-    this.formattedNumber,
-    this.isValid,
-  });
-
-  static const empty = PhoneNumber._(
-    country: null,
-    nationalNumber: '',
-    formattedNumber: '',
-    isValid: false,
-  );
-
-  /// Phone number country
-  final Country? country;
-
-  /// National number part of the phone number
-  final String? nationalNumber;
-
-  /// E.164 formatted phone number
-  final String? formattedNumber;
-
-  /// Stores whether or not the phone number is valid
-  final bool? isValid;
-
-  /// Normalize [number] by removing additional symbols
-  static String normalize(String number) {
-    return number.split('').where((c) => int.tryParse(c) != null).join();
-  }
-
   /// Create [PhoneNumber] instance using given [country] and [nationalNumber]
   factory PhoneNumber(Country? country, String? nationalNumber) {
     if (country == null && nationalNumber == null) {
       return empty.clone();
     }
 
-    final normalizedNationalNumber = normalize(nationalNumber ?? '');
+    final String normalizedNationalNumber = normalize(nationalNumber ?? '');
 
     return PhoneNumber._(
       country: country,
@@ -54,20 +23,24 @@ class PhoneNumber {
 
   /// Create [PhoneNumber] instance using country found by given [countryCode]
   /// and [nationalNumber]
+  @Deprecated('Use `PhoneNumber.isoCode` instead')
   factory PhoneNumber.countryCode(String countryCode, String nationalNumber) {
-    ArgumentError.checkNotNull(countryCode, 'countryCode');
-
     return PhoneNumber(Country.fromCode(countryCode), nationalNumber);
+  }
+
+  /// Create [PhoneNumber] instance using country found by given [isoCode]
+  /// and [nationalNumber]
+  factory PhoneNumber.isoCode(String isoCode, String nationalNumber) {
+    return PhoneNumber(Country.fromCode(isoCode), nationalNumber);
   }
 
   /// Parse given [value] into [PhoneNumber] instance
   factory PhoneNumber.parse(String value) {
-    ArgumentError.checkNotNull(value, 'value');
+    final String normalizedValue = normalize(value);
+    final Iterable<Country> matchedCountries =
+        countries.where((c) => c.matches(normalizedValue));
 
-    final normalizedValue = normalize(value);
-    final matchedCountries = countries.where((c) => c.matches(normalizedValue));
-
-    for (var item in matchedCountries) {
+    for (final item in matchedCountries) {
       if (item.isValidNumber(normalizedValue)) {
         return PhoneNumber._(
           nationalNumber: normalizedValue.substring(item.prefixLength),
@@ -96,8 +69,39 @@ class PhoneNumber {
     );
   }
 
+  const PhoneNumber._({
+    this.country,
+    required this.nationalNumber,
+    required this.formattedNumber,
+    required this.isValid,
+  });
+
+  static const PhoneNumber empty = PhoneNumber._(
+    country: null,
+    isValid: false,
+    nationalNumber: '',
+    formattedNumber: '',
+  );
+
+  /// Normalize [number] by removing additional symbols
+  static String normalize(String number) {
+    return number.split('').where((c) => int.tryParse(c) != null).join();
+  }
+
+  /// Phone number country
+  final Country? country;
+
+  /// National number part of the phone number
+  final String nationalNumber;
+
+  /// E.164 formatted phone number
+  final String formattedNumber;
+
+  /// Stores whether or not the phone number is valid
+  final bool isValid;
+
   @override
-  String toString() => formattedNumber!;
+  String toString() => formattedNumber;
 
   /// Create new [PhoneNumber] instance by modifying
   PhoneNumber copyWith({
@@ -115,9 +119,9 @@ class PhoneNumber {
 
   /// Create exact same clone of this [PhoneNumber] instance.
   PhoneNumber clone() => PhoneNumber._(
-        country: country,
-        formattedNumber: formattedNumber,
         isValid: isValid,
+        country: country,
         nationalNumber: nationalNumber,
+        formattedNumber: formattedNumber,
       );
 }
