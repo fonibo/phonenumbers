@@ -30,5 +30,23 @@ void main() {
         '+994112345676',
       );
     });
+
+    test('instances should be equal', () {
+      final _tNumber = PhoneNumber.parse('994 11-2345676');
+
+      expect(
+        _tNumber,
+        PhoneNumber.parse('994 11-2345676'),
+      );
+    });
+
+    test('instances should not be equal', () {
+      final _tNumber = PhoneNumber.parse('994 11-2345675');
+
+      expect(
+        _tNumber,
+        isNot(PhoneNumber.parse('994 11-2345676')),
+      );
+    });
   });
 }

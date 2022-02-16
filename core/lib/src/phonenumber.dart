@@ -1,3 +1,5 @@
+import 'package:quiver/core.dart';
+
 import 'country.dart';
 import 'data.dart';
 
@@ -123,5 +125,26 @@ class PhoneNumber {
         country: country,
         nationalNumber: nationalNumber,
         formattedNumber: formattedNumber,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (runtimeType == other.runtimeType &&
+            other is PhoneNumber &&
+            other.country == country &&
+            other.formattedNumber == formattedNumber &&
+            other.isValid == isValid &&
+            other.nationalNumber == nationalNumber);
+  }
+
+  @override
+  int get hashCode => hashObjects(
+        [
+          country,
+          formattedNumber,
+          isValid,
+          nationalNumber,
+        ],
       );
 }
