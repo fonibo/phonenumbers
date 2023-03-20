@@ -12,11 +12,20 @@ Phone number validation and filed written in pure dart without any native depend
 
 ## Why...?
 
-There's currently lots of phone number packages available in [pub.dev](https://pub.dev).
-But most of them uses platform channels to use native phone number library implementations
-like Google's LibPhonenumber. But adding additional abstraction layer (messaging channel
-between flutter and native code) increases complexity and creates another surface for point
-of failture. Also lots of exists libraries have lack of customizability features.
+Currently there are lots of packages available on [pub.dev](https://pub.dev) for working
+with phone numbers (inputs, validators, etc...) However, most of them are using native libraries
+like [libphonenumber](https://github.com/google/libphonenumber) under the hood. While those libraries
+are very well written implementations, they are not written natively for Flutter (yet). That means
+flutter library maintainers are using certain communication mechanisms like platform channels or ffi
+to communicate with those libraries. Additional abstraction layer of communication leads to increased
+implementation complexity and increases points of failure.
+
+This library however uses simplified dart-native implementation that doesn't require additional
+communication layer and also works synchronously / meaning you are guaranteed to get near-instant
+feedback (if it doesn't panic, I hope 🤞).
+
+That said, I am not trying to convience you that this is the best phone number utility for
+dart/flutter. It's just the library that got my job done during the time of writing my projects.
 
 ## Getting Started
 
