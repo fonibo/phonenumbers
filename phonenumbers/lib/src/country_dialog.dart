@@ -68,7 +68,7 @@ Widget _buildListTile(
     title: Text(country.name),
     trailing: Text(
       '+${country.prefix}',
-      style: theme.textTheme.bodyText1!.copyWith(color: theme.accentColor),
+      style: theme.textTheme.bodyText1!.copyWith(color: theme.colorScheme.secondary),
     ),
     leading: leading != null || showLeading
         ? DefaultTextStyle(
