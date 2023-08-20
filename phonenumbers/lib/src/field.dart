@@ -111,7 +111,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = widget.style ?? Theme.of(context).textTheme.bodyText1;
+    final textStyle = widget.style ?? Theme.of(context).textTheme.bodyLarge;
 
     return InputDecorator(
       decoration: InputDecoration(

@@ -68,11 +68,12 @@ Widget _buildListTile(
     title: Text(country.name),
     trailing: Text(
       '+${country.prefix}',
-      style: theme.textTheme.bodyText1!.copyWith(color: theme.colorScheme.secondary),
+      style: theme.textTheme.bodyLarge!
+          .copyWith(color: theme.colorScheme.secondary),
     ),
     leading: leading != null || showLeading
         ? DefaultTextStyle(
-            style: theme.textTheme.headline6!,
+            style: theme.textTheme.titleLarge!,
             child: Opacity(
               opacity: 0.5,
               child: leading,
@@ -106,7 +107,9 @@ class _CountrySearchDelegate extends SearchDelegate<Country> {
         filteredCountries[index],
         onTap: () {
           final country = filteredCountries[index];
-          Navigator.of(context)..pop()..pop(country);
+          Navigator.of(context)
+            ..pop()
+            ..pop(country);
         },
       ),
     );

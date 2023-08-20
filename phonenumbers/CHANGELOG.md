@@ -1,3 +1,10 @@
+## 1.1.1
+
+### Features
+
+- Dart SDK 3.x.y support
+- Replaced `theme.accentColor` with `theme.colorScheme.secondary` - [#9](https://github.com/fonibo/phonenumbers/pull/9)
+
 ## 1.1.0
 
 ### Features

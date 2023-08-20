@@ -1,6 +1,4 @@
 analyzer:
-  strong-mode:
-    implicit-casts: true
   errors:
     # treat missing required parameters as a warning (not a hint)
     missing_required_param: warning
@@ -12,7 +10,6 @@ analyzer:
 linter:
   rules:
     - always_declare_return_types
-    - always_require_non_null_named_parameters
     - unawaited_futures
     - annotate_overrides
     - avoid_bool_literals_in_conditional_expressions
@@ -70,7 +67,6 @@ linter:
     - prefer_collection_literals
     - prefer_conditional_assignment
     - prefer_contains
-    - prefer_equal_for_default_values
     - prefer_final_fields
     - prefer_final_in_for_each
     - prefer_final_locals
